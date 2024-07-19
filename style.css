@@ -5,10 +5,12 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f7f7f7;
+    flex-direction: column;
 }
 
 .wheel-container {
     text-align: center;
+    position: relative;
 }
 
 .wheel {
@@ -26,11 +28,12 @@ body {
     position: absolute;
     width: 50%;
     height: 50%;
-    background-color: #333;
     transform-origin: 100% 100%;
     clip-path: polygon(0 0, 100% 0, 100% 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    line-height: 150px;
     color: #fff;
     font-weight: bold;
     font-size: 10px;
@@ -56,3 +59,17 @@ button {
     padding: 10px 20px;
     font-size: 16px;
 }
+
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+}
+
+.result.show {
+    opacity: 1;
+}
+
