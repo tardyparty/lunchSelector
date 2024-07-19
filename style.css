@@ -13,10 +13,32 @@ body {
     position: relative;
 }
 
+#wheel {
+    border-radius: 50%;
+    border: 5px solid #ccc;
+}
+
+#arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #333;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
+}
+
+#speedControl {
+    width: 300px;
+    margin: 20px 0;
 }
 
 .result {
@@ -31,3 +53,4 @@ button {
 .result.show {
     opacity: 1;
 }
+
