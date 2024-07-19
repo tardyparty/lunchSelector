@@ -20,7 +20,7 @@ let startAngle = 0;
 const arc = Math.PI / (slices.length / 2);
 let spinTimeout = null;
 
-const spinArcStart = 10;
+const spinArcStart = 30; // Increased initial speed
 let spinTime = 0;
 let spinTimeTotal = 0;
 
@@ -45,6 +45,7 @@ function drawText(slice, startAngle, arc) {
 }
 
 function drawWheel() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for(let i = 0; i < slices.length; i++) {
         const angle = startAngle + i * arc;
         drawSlice(slices[i], colors[i], angle, arc);
@@ -53,7 +54,7 @@ function drawWheel() {
 }
 
 function rotateWheel() {
-    spinTime += 30;
+    spinTime += 20;
     if(spinTime >= spinTimeTotal) {
         stopRotateWheel();
         return;
@@ -61,7 +62,7 @@ function rotateWheel() {
     const spinAngle = spinArcStart - easeOut(spinTime, 0, spinArcStart, spinTimeTotal);
     startAngle += (spinAngle * Math.PI / 180);
     drawWheel();
-    spinTimeout = setTimeout(rotateWheel, 30);
+    spinTimeout = setTimeout(rotateWheel, 20);
 }
 
 function stopRotateWheel() {
@@ -84,7 +85,7 @@ spinButton.addEventListener('click', function() {
     result.textContent = '';
     spinTime = 0;
     const speed = parseInt(speedControl.value);
-    spinTimeTotal = (Math.random() * 3 + 4) * 1000 / speed;
+    spinTimeTotal = (Math.random() * 2 + 4) * 1000; // Reduced total time to make it faster
     rotateWheel();
 });
 
