@@ -1,28 +1,90 @@
-document.getElementById('spinButton').addEventListener('click', function() {
-    const wheel = document.getElementById('wheel');
-    const result = document.getElementById('result');
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+const result = document.getElementById('result');
+const spinButton = document.getElementById('spinButton');
 
-    // Reset the result display
+const slices = [
+    "Chuy's", "Primos", "Steak", "BBQ", "Pizza", "Sub Sandwiches", 
+    "David Picks", "Jeremy Picks", "Nic Picks", "Mark Picks", 
+    "Chad Picks", "Gill Picks", "Kit Picks", "Burgers"
+];
+
+const colors = [
+    "#f1c40f", "#e67e22", "#e74c3c", "#3498db", "#2ecc71", "#9b59b6", 
+    "#f39c12", "#1abc9c", "#2c3e50", "#8e44ad", "#d35400", "#c0392b", 
+    "#27ae60", "#2980b9"
+];
+
+let startAngle = 0;
+const arc = Math.PI / (slices.length / 2);
+let spinTimeout = null;
+
+const spinArcStart = 10;
+let spinTime = 0;
+let spinTimeTotal = 0;
+
+ctx.font = 'bold 12px Helvetica, Arial';
+
+function drawSlice(slice, color, startAngle, arc) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, startAngle, startAngle + arc, false);
+    ctx.lineTo(canvas.width / 2, canvas.height / 2);
+    ctx.fill();
+}
+
+function drawText(slice, startAngle, arc) {
+    ctx.save();
+    ctx.fillStyle = 'white';
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(startAngle + arc / 2);
+    ctx.fillText(slice, canvas.width / 4, 0);
+    ctx.restore();
+}
+
+function drawWheel() {
+    for(let i = 0; i < slices.length; i++) {
+        const angle = startAngle + i * arc;
+        drawSlice(slices[i], colors[i], angle, arc);
+        drawText(slices[i], angle, arc);
+    }
+}
+
+function rotateWheel() {
+    spinTime += 30;
+    if(spinTime >= spinTimeTotal) {
+        stopRotateWheel();
+        return;
+    }
+    const spinAngle = spinArcStart - easeOut(spinTime, 0, spinArcStart, spinTimeTotal);
+    startAngle += (spinAngle * Math.PI / 180);
+    drawWheel();
+    spinTimeout = setTimeout(rotateWheel, 30);
+}
+
+function stopRotateWheel() {
+    clearTimeout(spinTimeout);
+    const degrees = startAngle * 180 / Math.PI + 90;
+    const arcd = arc * 180 / Math.PI;
+    const index = Math.floor((360 - degrees % 360) / arcd);
+    result.textContent = `You should go to: ${slices[index]}`;
+    result.classList.add('show');
+}
+
+function easeOut(t, b, c, d) {
+    const ts = (t /= d) * t;
+    const tc = ts * t;
+    return b + c * (tc + -3 * ts + 3 * t);
+}
+
+spinButton.addEventListener('click', function() {
     result.classList.remove('show');
     result.textContent = '';
-
-    // Remove any existing transform styles to reset the spin
-    wheel.style.transition = 'none';
-    wheel.style.transform = 'rotate(0deg)';
-
-    // Allow the browser to process the reset
-    setTimeout(() => {
-        const randomDegrees = Math.floor(Math.random() * 360) + 3600; // Ensure multiple spins
-        wheel.style.transition = 'transform 5s ease-out';
-        wheel.style.transform = `rotate(${randomDegrees}deg)`;
-
-        setTimeout(() => {
-            const slices = document.querySelectorAll('.slice');
-            const sliceAngle = 360 / slices.length;
-            const selectedSlice = Math.floor((randomDegrees % 360) / sliceAngle);
-            result.textContent = `You should go to: ${slices[selectedSlice].textContent}`;
-            result.classList.add('show');
-        }, 5000); // Match the transition duration
-    }, 50); // Small delay to allow the reset to process
+    spinTime = 0;
+    spinTimeTotal = Math.random() * 3 + 4 * 1000;
+    rotateWheel();
 });
+
+drawWheel();
 
