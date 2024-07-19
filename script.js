@@ -69,7 +69,7 @@ function stopRotateWheel() {
     clearTimeout(spinTimeout);
     const degrees = startAngle * 180 / Math.PI + 90;
     const arcd = arc * 180 / Math.PI;
-    const index = Math.floor((360 - degrees % 360) / arcd);
+    const index = Math.floor((degrees % 360) / arcd);
     result.textContent = slices[index];
     result.classList.add('show');
 }
