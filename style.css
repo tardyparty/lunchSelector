@@ -27,7 +27,7 @@ body {
     border-right: 20px solid transparent;
     border-bottom: 20px solid #333;
     position: absolute;
-    top: -15px; /* Adjusted to overlap the wheel slightly */
+    top: -10px; /* Adjusted to overlap the wheel slightly */
     left: 50%;
     transform: translateX(-50%);
 }
