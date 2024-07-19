@@ -85,7 +85,7 @@ spinButton.addEventListener('click', function() {
     result.textContent = '';
     spinTime = 0;
     const speed = parseInt(speedControl.value);
-    spinTimeTotal = (Math.random() * 2 + 4) * 1000; // Reduced total time to make it faster
+    spinTimeTotal = (Math.random() * 2 + 4) * 1000 * (11 - speed); // Adjust spin time based on speed
     rotateWheel();
 });
 
