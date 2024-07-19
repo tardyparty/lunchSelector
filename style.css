@@ -13,53 +13,6 @@ body {
     position: relative;
 }
 
-.wheel {
-    position: relative;
-    width: 80vmin; /* Responsive size */
-    height: 80vmin; /* Responsive size */
-    border-radius: 50%;
-    border: 5px solid #ccc;
-    overflow: hidden;
-    transform: rotate(0deg);
-    transition: transform 5s ease-out;
-}
-
-.slice {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    transform-origin: 100% 100%;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: calc(2vmin); /* Responsive font size */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.slice span {
-    transform: rotate(calc(360deg / 14 / -2)) translateX(50%) rotate(90deg);
-    transform-origin: left center;
-}
-
-.slice:nth-child(1) { transform: rotate(calc(360deg / 14 * 0)); background: #f1c40f; }
-.slice:nth-child(2) { transform: rotate(calc(360deg / 14 * 1)); background: #e67e22; }
-.slice:nth-child(3) { transform: rotate(calc(360deg / 14 * 2)); background: #e74c3c; }
-.slice:nth-child(4) { transform: rotate(calc(360deg / 14 * 3)); background: #3498db; }
-.slice:nth-child(5) { transform: rotate(calc(360deg / 14 * 4)); background: #2ecc71; }
-.slice:nth-child(6) { transform: rotate(calc(360deg / 14 * 5)); background: #9b59b6; }
-.slice:nth-child(7) { transform: rotate(calc(360deg / 14 * 6)); background: #f39c12; }
-.slice:nth-child(8) { transform: rotate(calc(360deg / 14 * 7)); background: #1abc9c; }
-.slice:nth-child(9) { transform: rotate(calc(360deg / 14 * 8)); background: #2c3e50; }
-.slice:nth-child(10) { transform: rotate(calc(360deg / 14 * 9)); background: #8e44ad; }
-.slice:nth-child(11) { transform: rotate(calc(360deg / 14 * 10)); background: #d35400; }
-.slice:nth-child(12) { transform: rotate(calc(360deg / 14 * 11)); background: #c0392b; }
-.slice:nth-child(13) { transform: rotate(calc(360deg / 14 * 12)); background: #27ae60; }
-.slice:nth-child(14) { transform: rotate(calc(360deg / 14 * 13)); background: #2980b9; }
-
 button {
     margin-top: 20px;
     padding: 10px 20px;
