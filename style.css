@@ -40,10 +40,11 @@ body {
 .slice span {
     position: absolute;
     top: 50%;
-    left: 100%;
+    left: 50%;
     transform-origin: 0 0;
-    transform: rotate(calc(25.71deg / 2)) translate(-50%, -50%);
-    text-align: left;
+    transform: rotate(calc(-25.71deg / 2)) translate(20%, -50%);
+    writing-mode: vertical-rl;
+    text-align: center;
 }
 
 .slice:nth-child(1) { transform: rotate(0deg); background: #f1c40f; }
@@ -79,4 +80,5 @@ button {
 .result.show {
     opacity: 1;
 }
+
 
