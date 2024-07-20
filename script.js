@@ -2,7 +2,6 @@ const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
 const result = document.getElementById('result');
 const spinButton = document.getElementById('spinButton');
-const speedControl = document.getElementById('speedControl');
 
 const slices = [
     "Chuy's", "Primos", "Steak", "BBQ", "Pizza", "Sub Sandwiches", 
@@ -69,7 +68,7 @@ function stopRotateWheel() {
     clearTimeout(spinTimeout);
     const degrees = startAngle * 180 / Math.PI + 90;
     const arcd = arc * 180 / Math.PI;
-    const index = Math.floor((degrees % 360) / arcd);
+    const index = Math.floor((360 - degrees % 360) / arcd);
     result.textContent = slices[index];
     result.classList.add('show');
 }
@@ -84,8 +83,7 @@ spinButton.addEventListener('click', function() {
     result.classList.remove('show');
     result.textContent = '';
     spinTime = 0;
-    const speed = parseInt(speedControl.value);
-    spinTimeTotal = (Math.random() * 2 + 4) * 1000 * (11 - speed); // Adjust spin time based on speed
+    spinTimeTotal = (Math.random() * 3 + 4) * 1000; // Adjust spin time for more realistic effect
     rotateWheel();
 });
 
